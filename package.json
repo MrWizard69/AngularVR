@@ -13,7 +13,7 @@
     "remoterepo": "git remote add origin ssh://git@github.com/MrWizard69/AngularTourOfHeros.git",
     "deploymaster": "ng build --prod && angular-cli-ghpages --branch master",
     "buildprod": "ng build --prod",
-    "ghpagesdeploy": "ng build --prod --base-href https://mrwizard69.github.io/AngularTourOfHeros/",
+    "ghpagesdeploy": "ng build --prod --base-href https://mrwizard69.github.io/AngularVR/",
     "publishpages": "ngh"
   },
   "private": true,

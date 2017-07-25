@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Welcome To The Angular VR!';
+  title = 'Welcome To Angular VR!';
 
   //git commands
   //git init <-- starts looking for new changes. used before you work
