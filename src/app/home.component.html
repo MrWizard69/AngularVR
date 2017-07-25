@@ -50,12 +50,14 @@
     <a-plane rotation="-90 0 0" position="2 -1 -2" color="#aaa" width="60" height="50" depth="2" src="#floor"></a-plane>
 
 
-    <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
+    <!--<a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
 
-    <a-entity daydream-controls></a-entity>
+    <a-entity daydream-controls></a-entity>-->
 
     <!-- Match Gear VR controller if present, regardless of hand. -->
-    <a-entity gearvr-controls></a-entity>
+    <!--<a-entity gearvr-controls></a-entity>-->
+    <a-entity gearvr-controls="hand: left"></a-entity>
+    <!--<a-entity gearvr-controls="hand: right"></a-entity>-->
 
     </a-scene>
 
