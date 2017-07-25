@@ -8,7 +8,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "createGhPages" : "npm install --save-dev angular-cli-ghpages",
+    "remoterepo": "git remote add origin ssh://git@github.com/MrWizard69/AngularTourOfHeros.git",
+    "deploymaster": "ng build --prod && angular-cli-ghpages --branch master",
+    "buildprod": "ng build --prod",
+    "ghpagesdeploy": "ng build --prod --base-href https://mrwizard69.github.io/AngularTourOfHeros/",
+    "publishpages": "ngh"
   },
   "private": true,
   "dependencies": {

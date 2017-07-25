@@ -3,12 +3,62 @@
 
 <div id="HomeWrapper">
 
-    <a-scene>
+    <!--<a-scene>
         <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
         <a-box position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9"></a-box>
         <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+
+
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
+    </a-scene>-->
+
+    <a-scene>
+    <a-assets>
+        <img id="box" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/crate-texture.jpg" crossorigin="anonymous">
+        <img id="walls" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/brick-texture.jpg" crossorigin="anonymous">
+        <img id="ceiling" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/wood-texture.jpg" crossorigin="anonymous">
+        <img id="floor" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/tile-texture.jpg" crossorigin="true">
+    </a-assets>
+
+    <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
+            position="-5 0.1 0" rotation="0 45 0" 
+            src="#box">
+    </a-box>
+    <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
+            position="5 .2 -4" rotation="0 -45 0" 
+            src="#box">
+    </a-box>
+    <!-- Top Box -->
+    <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
+            position="5 1.7 -4" rotation="0 25 0" 
+            src="#box">
+    </a-box>
+    
+    <!-- Walls -->
+    <a-box color="#FFF" width="20" height="20"
+            position="-10 0 0" rotation="0 90 0" 
+            src="#walls">
+    </a-box>
+    <a-box color="#FFF" width="20" height="20" position="0 0 -10" src="#walls">
+    </a-box>
+    <a-box color="#FFF" width="20" height="20" position="10 0 0" rotation="0 90 0" src="#walls">
+    </a-box>
+    <a-box color="#FFF" width="20" height="20" position="0 0 10" src="#walls">
+    </a-box>
+    <!-- Ceiling -->
+    <a-box color="#FFF" width="20" height="20" position="0 10 0" rotation="90 0 0" src="#ceiling"></a-box>
+
+    <!-- New lights. -->
+    <!--<a-light type="spot" color="#fff" position="5 5 3" look-at="a-box" intensity="1.5"> </a-light>
+    <a-light type="point" color="#AAA" position="-5 5 7" intensity="0.375"></a-light>-->
+    
+    <!-- Sky / Background -->
+    <a-sky color="#000"></a-sky>
+    
+    <!-- Floor -->
+    <a-plane rotation="-90 0 0" position="2 -1 -2" color="#aaa" width="60" height="50" depth="2" src="#floor"></a-plane>
+
     </a-scene>
 
     <!--<p>Welcome to the Angular Web Template. Let this template be the base of your next Angular project.</p>
