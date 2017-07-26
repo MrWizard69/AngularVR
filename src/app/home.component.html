@@ -27,8 +27,8 @@
     <!-- Match Gear VR controller if present, regardless of hand. -->
     <!--<a-entity gearvr-controls></a-entity>-->
           <!-- Hands. -->
-    <a-entity hand-controls="right" aabb-collider="objects: .cube;" grab></a-entity>
-    <a-entity hand-controls="left" aabb-collider="objects: .cube;" grab></a-entity>
+    <a-entity gearvr-controls="hand: right" aabb-collider="objects: .cube;" grab></a-entity>
+    <a-entity gearvr-controls="hand: left" aabb-collider="objects: .cube;" grab></a-entity>
 
     <a-entity class="cube" mixin="cube" position="3 1.65 0"></a-entity>
 
