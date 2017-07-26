@@ -1,9 +1,9 @@
 
 <h1>{{title}}</h1>
 
-  <script src="aabb-collider.js"></script>
+  <!--<script src="aabb-collider.js"></script>
   <script src="grab.js"></script>
-  <script src="ground.js"></script>
+  <script src="ground.js"></script>-->
 
 <div id="HomeWrapper">
 
@@ -24,13 +24,13 @@
 
     </a-assets>
 
+    
+
     <!-- Match Gear VR controller if present, regardless of hand. -->
     <!--<a-entity gearvr-controls></a-entity>-->
           <!-- Hands. -->
-    <a-entity gearvr-controls="hand: right" aabb-collider="objects: .cube;" grab></a-entity>
-    <a-entity gearvr-controls="hand: left" aabb-collider="objects: .cube;" grab></a-entity>
 
-    <a-entity class="cube" mixin="cube" position="3 1.65 0"></a-entity>
+    <!--<a-entity class="cube" mixin="cube" position="3 1.65 0"></a-entity>-->
 
     <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
             position="-5 0.1 0" rotation="0 45 0" 
@@ -79,6 +79,17 @@
 
     <!--<a-entity gearvr-controls="hand: left"></a-entity>-->
     <!--<a-entity gearvr-controls="hand: right"></a-entity>-->
+
+    <a-entity camera="userHeight: 1.6" look-controls></a-entity>
+    <a-entity camera look-controls></a-entity>
+
+    <a-entity id="leftHand" hand-controls="left"></a-entity>
+    <a-entity id="rightHand" hand-controls="right"></a-entity>
+
+    <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
+
+    <a-entity gearvr-controls></a-entity>
+
 
     </a-scene>
 
