@@ -11,6 +11,9 @@
         <img id="floor" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/tile-texture.jpg" crossorigin="true">
     </a-assets>
 
+    <!-- Match Gear VR controller if present, regardless of hand. -->
+    <a-entity gearvr-controls></a-entity>
+
     <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
             position="-5 0.1 0" rotation="0 45 0" 
             src="#box">
@@ -51,13 +54,13 @@
 
 
     <!--<a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
-
     <a-entity daydream-controls></a-entity>-->
 
-    <!-- Match Gear VR controller if present, regardless of hand. -->
-    <!--<a-entity gearvr-controls></a-entity>-->
+    <!--<a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>-->
+
+
     <!--<a-entity gearvr-controls="hand: left"></a-entity>-->
-    <a-entity gearvr-controls="hand: right"></a-entity>
+    <!--<a-entity gearvr-controls="hand: right"></a-entity>-->
 
     </a-scene>
 
