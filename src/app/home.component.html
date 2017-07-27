@@ -8,6 +8,9 @@
 <div id="HomeWrapper">
 
     <a-scene>
+
+    <!-- This is where all the textures are -->
+    
     <a-assets>
         <img id="box" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/crate-texture.jpg" crossorigin="anonymous">
         <img id="walls" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/brick-texture.jpg" crossorigin="anonymous">
@@ -24,13 +27,32 @@
 
     </a-assets>
 
+    <!--this is the camera and the Gear Controller section -->
     
+    <a-entity id="rightHand" hand-controls="right"></a-entity>
+    <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 0 0">
 
-    <!-- Match Gear VR controller if present, regardless of hand. -->
-    <!--<a-entity gearvr-controls></a-entity>-->
-          <!-- Hands. -->
+        <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
 
-    <!--<a-entity class="cube" mixin="cube" position="3 1.65 0"></a-entity>-->
+        <a-entity gearvr-controls>
+            
+                <a-entity cursor="fuse: true; fuseTimeout: 500"
+                            position="0 0 -2.1"
+                            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                            material="color: purple; shader: flat">
+                </a-entity>
+
+                 <a-entity geometry="primitive: box; height: 0.1; width: 0.1" position=".1 -1.5 -.4"
+            material="color: brown; opacity: 1" rotation="45 0 0" ></a-entity>
+
+        </a-entity>
+
+    </a-entity>
+        
+  
+    <!-- level begin -->
+
+    <a-entity id="hexagon" class="cube" mixin="cube" position="3 1.65 0"></a-entity>
 
     <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
             position="-5 0.1 0" rotation="0 45 0" 
@@ -70,36 +92,14 @@
     <!-- Floor -->
     <a-plane rotation="-90 0 0" position="2 -1 -2" color="#aaa" width="60" height="50" depth="2" src="#floor"></a-plane>
 
-
-    <!--<a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
-    <a-entity daydream-controls></a-entity>-->
-
-    <!--<a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>-->
-
-
-    <!--<a-entity gearvr-controls="hand: left"></a-entity>-->
-    <!--<a-entity gearvr-controls="hand: right"></a-entity>-->
-
-    <a-entity camera="userHeight: 1.6" look-controls>
-
-        <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
-
-        <a-entity gearvr-controls></a-entity>
-
-    </a-entity>
-    <!--<a-camera>
-        <a-cursor></a-cursor>
-    </a-camera>-->
-
-
-    <!--<a-entity id="leftHand" hand-controls="left"></a-entity>-->
-    <!--<a-entity id="rightHand" hand-controls="right"></a-entity>-->
-
-
+    <!-- level end -->
 
 
     </a-scene>
 
     
 
+    
+
 </div>
+
