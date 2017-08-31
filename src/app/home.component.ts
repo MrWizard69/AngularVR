@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
         console.log(cursor);
 
         let depth = -1;
-        let maxDepth = -5;
+        let maxDepth = -3;
         let north = 1;
         let direction = "forward";
 
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
                 depth--;
                 north--;
-                cursor.setAttribute('position', '0 '+ 0 + ' ' + depth);
+                cursor.setAttribute('position', '0.1 '+ -1 + ' ' + depth);
 
                 if(depth < maxDepth){
 
@@ -49,9 +49,9 @@ export class HomeComponent implements OnInit {
 
                 depth++;
                 north++;
-                cursor.setAttribute('position', '0 '+ 0 + ' ' + depth);
+                cursor.setAttribute('position', '0.1 '+ -1 + ' ' + depth);
 
-                if(depth > -2){
+                if(depth > -1.9){
 
                     direction = "forward";
                 }
