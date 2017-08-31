@@ -27,37 +27,37 @@ export class HomeComponent implements OnInit {
 
         console.log(cursor);
 
-        // let depth = -1;
-        // let maxDepth = -10;
-        // let north = 1;
-        // let direction = "forward";
+        let depth = -1;
+        let maxDepth = -5;
+        let north = 1;
+        let direction = "forward";
 
-        // setInterval(function(){
+        setInterval(function(){
 
-        //     if(direction == "forward"){
+            if(direction == "forward"){
 
-        //         depth--;
-        //         north--;
-        //         cursor.setAttribute('position', '0 '+ north + ' ' + depth);
+                depth--;
+                north--;
+                cursor.setAttribute('position', '0 '+ 0 + ' ' + depth);
 
-        //         if(depth < maxDepth){
+                if(depth < maxDepth){
 
-        //             direction = "backward";
-        //         }
-        //     }
-        //     if(direction == "backward"){
+                    direction = "backward";
+                }
+            }
+            if(direction == "backward"){
 
-        //         depth++;
-        //         north++;
-        //         cursor.setAttribute('position', '0 '+ north + ' ' + depth);
+                depth++;
+                north++;
+                cursor.setAttribute('position', '0 '+ 0 + ' ' + depth);
 
-        //         if(depth > -2){
+                if(depth > -2){
 
-        //             direction = "forward";
-        //         }
-        //     }
+                    direction = "forward";
+                }
+            }
 
-        // },30);
+        },30);
 
         console.log(this.aframe);
 
