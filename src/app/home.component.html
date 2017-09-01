@@ -32,12 +32,12 @@
     <a-entity id="rightHand" hand-controls="right"></a-entity>
     <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 0 0">
 
-        <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
+        <a-entity tracked-controls="controller: 0; idPrefix: OpenVR;"></a-entity>
 
-        <a-entity gearvr-controls>
+        <a-entity gearvr-controls id="GearVrController">
             
-                <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 500"
-                            position="0 0 -2.1"
+                <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 500; downEvents: gamepadbuttondown; upEvents: gamepadbuttonup;"
+                            position="0 0 -2"
                             geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
                             material="color: purple; shader: flat">
                 </a-entity>
