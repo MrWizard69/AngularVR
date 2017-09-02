@@ -30,7 +30,7 @@
     <!--this is the camera and the Gear Controller section -->
     
     <a-entity id="rightHand" hand-controls="right"></a-entity>
-    <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 0 0">
+    <a-entity id="player" camera="userHeight: 1.6" look-controls wasd-controls position="0 0 0">
 
         <a-entity tracked-controls="controller: 0; idPrefix: OpenVR;"></a-entity>
 
@@ -42,7 +42,7 @@
                             material="color: purple; shader: flat">
                 </a-entity>
                 
-                 <a-entity geometry="primitive: box; height: 0.1; width: 0.1" position=".1 -1.5 -.4"
+                 <a-entity id="Wand" geometry="primitive: box; height: 0.1; width: 0.1" position=".1 -1.5 -.4"
             material="color: #49311c; opacity: 1" rotation="45 0 0" ></a-entity>
 
         </a-entity>
@@ -53,6 +53,8 @@
     <!-- level begin -->
 
     <a-entity id="hexagon" class="cube" mixin="cube" position="3 1.65 0"></a-entity>
+
+    <a-entity id="enemy1" class="cube" mixin="cube" position="2 1.65 2"></a-entity>
 
     <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
             position="-5 0.1 0" rotation="0 45 0" 
@@ -88,6 +90,8 @@
     
     <!-- Sky / Background -->
     <a-sky color="#000"></a-sky>
+
+    <a-plane id="ForwardBox" rotation="-90 0 0" position="1 -.5 0" color="green" width="1" height="1" depth="2"></a-plane>
     
     <!-- Floor -->
     <a-plane rotation="-90 0 0" position="2 -1 -2" color="#aaa" width="60" height="50" depth="2" src="#floor"></a-plane>

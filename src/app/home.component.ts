@@ -25,34 +25,45 @@ export class HomeComponent implements OnInit {
 
         let cursor = document.querySelector('.cursor');
 
-        console.log(cursor);
+        //console.log(cursor);
 
-        let depth = -1;
-        let maxDepth = -3;
-        let north = 1;
-        let direction = "forward";
+        let maxDepth: number = -3;
+        let direction: string = "forward";
+
+        let cursorX: number = .1;
+        let cursorY: number = 0;
+        let cursorZ: number = -2;
+
+        let playerX: number = 0;
+        let playerY: number = 0;
+        let playerZ: number = 0;
+
+        let wandX: number = .1;
+        let wandY: number = -1.5;
+        let wandZ: number = -.4;
+
 
 
         setInterval(function(){
 
             if(direction == "forward"){
 
-                depth--;
-                north--;
-                cursor.setAttribute('position', '0.1 '+ -1 + ' ' + depth);
+                cursorZ--;
+                cursorY = -1;
+                cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
 
-                if(depth < maxDepth){
+                if(cursorZ < maxDepth){
 
                     direction = "backward";
                 }
             }
             if(direction == "backward"){
 
-                depth++;
-                north++;
-                cursor.setAttribute('position', '0.1 '+ -1 + ' ' + depth);
+                cursorZ++;
+                cursorY = -1;
+                cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
 
-                if(depth > -2){
+                if(cursorZ > -2){
 
                     direction = "forward";
                 }
@@ -75,16 +86,49 @@ export class HomeComponent implements OnInit {
             this.setAttribute('material', 'color', '#ffffff');
         });
 
-          let controller = navigator.getGamepads();
-          console.log(controller);
+        document.querySelector('#enemy1').addEventListener('click', function () {
+            this.setAttribute('material', 'color', '#ffffff');
+            this.removeChild();
+            //document.querySelector('.enemy').remove();
 
-         for(var i = 0; i < controller.length; i++){
+            // let elems = document.getElementsByClassName("enemy");
+            // for (let i = elems.length - 1; i >= 0; i--) {
+            //     let parent = elems[i].parentNode;
+            //     parent.removeChild(elems[i]);
+            // }
 
-            if(controller[i] != null){
+        });
 
-                alert("controller " + i + " is connected; controller map " + controller[i].mapping + "; controller button1 " + controller[i].buttons[0].pressed);
-            }
-         }
+        //forward direction
+
+        document.querySelector('#ForwardBox').addEventListener('click', function () {
+
+            let player = document.querySelector('#player');
+            let wand = document.querySelector('#Wand');
+            let cursor = document.querySelector('.cursor');
+
+            playerX += 1;
+            playerY = 1.6;
+
+            cursorX += 1;
+            //cursorZ += 1;
+
+            player.setAttribute('position', '1 1.6 0');
+            wand.setAttribute('position', '1.1 -1.5 -.4');
+            cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
+            //player.setAttribute('camera','userHeight', '1.6');
+        });
+
+        //   let controller = navigator.getGamepads();
+        //   console.log(controller);
+
+        //  for(var i = 0; i < controller.length; i++){
+
+        //     if(controller[i] != null){
+
+        //         alert("controller " + i + " is connected; controller map " + controller[i].mapping + "; controller button1 " + controller[i].buttons[0].pressed);
+        //     }
+        //  }
 
         //This is an experiment for a GearVR controller
 
