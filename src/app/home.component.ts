@@ -42,6 +42,81 @@ export class HomeComponent implements OnInit {
         let wandY: number = -1.5;
         let wandZ: number = -.4;
 
+//         var Hunter = {
+//             color: "orange",
+//             x: Math.round(Math.random() * (canvas.width * .90)),
+//             y: Math.round(Math.random() * (canvas.height * .90)),
+//            draw: function() {
+//               ctx.beginPath(); // this is the ai guy
+//               ctx.fillStyle = this.color;
+//               ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
+//               ctx.fill();
+//               ctx.closePath();
+//             },
+//            movement: function(){
+   
+//                //this will make direct the enemy move in the direction of the player
+//                if(this.x < x){
+                   
+//                    //this.x += 1.6;
+
+//                    if(slowMotion == true){
+
+//                        this.x += (canvas.width) * 0.0015;
+//                    }
+//                    else if(slowMotion == false){
+
+//                        this.x += (canvas.width) * 0.0044;
+//                    } 
+               
+//                }
+//                if(this.x > x){
+                   
+//                    //this.x -= 1.6;
+
+//                    if(slowMotion == true){
+
+//                        this.x -= (canvas.width) * 0.0015;
+//                    }
+//                    else if(slowMotion == false){
+
+//                        this.x -= (canvas.width) * 0.0044;
+//                    } 
+                   
+//                }
+//                if(this.y < y){
+                   
+//                    //this.y += 1.6;
+
+//                    if(slowMotion == true){
+
+//                        this.y += (canvas.height) * 0.0015;
+//                    }
+//                    else if(slowMotion == false){
+
+//                        this.y += (canvas.height) * 0.0044;
+//                    } 
+                   
+//                }
+//                if(this.y > y){
+                   
+//                    //this.y -= 1.6;
+
+//                    if(slowMotion == true){
+
+//                        this.y -= (canvas.height) * 0.0015;
+//                    }
+//                    else if(slowMotion == false){
+
+//                        this.y -= (canvas.height) * 0.0044;
+//                    } 
+//                }
+               
+               
+//   }
+            
+// };
+
 
 
         setInterval(function(){
@@ -88,36 +163,31 @@ export class HomeComponent implements OnInit {
 
         document.querySelector('#enemy1').addEventListener('click', function () {
             this.setAttribute('material', 'color', '#ffffff');
-            this.removeChild();
-            //document.querySelector('.enemy').remove();
-
-            // let elems = document.getElementsByClassName("enemy");
-            // for (let i = elems.length - 1; i >= 0; i--) {
-            //     let parent = elems[i].parentNode;
-            //     parent.removeChild(elems[i]);
-            // }
-
+            let enemy = document.querySelector('#enemy1');
+            enemy.parentNode.removeChild(enemy);
         });
 
         //forward direction
 
-        document.querySelector('#ForwardBox').addEventListener('click', function () {
+        // document.querySelector('#ForwardBox').addEventListener('click', function () {
 
-            let player = document.querySelector('#player');
-            let wand = document.querySelector('#Wand');
-            let cursor = document.querySelector('.cursor');
+        //     let player = document.querySelector('#player');
+        //     let wand = document.querySelector('#Wand');
+        //     let cursor = document.querySelector('.cursor');
 
-            playerX += 1;
-            playerY = 1.6;
+        //     playerX += 1;
+        //     playerY = 1.6;
 
-            cursorX += 1;
-            //cursorZ += 1;
+        //     cursorX += 2;
+        //     //cursorZ += 1;
 
-            player.setAttribute('position', '1 1.6 0');
-            wand.setAttribute('position', '1.1 -1.5 -.4');
-            cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
-            //player.setAttribute('camera','userHeight', '1.6');
-        });
+        //     player.setAttribute('position', '2 1.6 0');
+        //     wand.setAttribute('position', '2.1 -1.5 -.4');
+        //     cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
+        //     //player.setAttribute('camera','userHeight', '1.6');
+        // });
+
+        //this is the gamepad thing
 
         //   let controller = navigator.getGamepads();
         //   console.log(controller);
