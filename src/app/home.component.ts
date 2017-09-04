@@ -21,14 +21,16 @@ export class HomeComponent implements OnInit {
     ngOnInit(){
         
         console.log("You are on the home page");
+
+        let scene = document.getElementById('Scene');
+
         this.aframe = this.elem.querySelector('a-scene');
 
         let cursor = document.querySelector('.cursor');
 
-        //console.log(cursor);
+        let Enemy1Group = [];
 
-        let maxDepth: number = -3;
-        let direction: string = "forward";
+        //console.log(cursor);    
 
         let cursorX: number = .1;
         let cursorY: number = 0;
@@ -42,82 +44,75 @@ export class HomeComponent implements OnInit {
         let wandY: number = -1.5;
         let wandZ: number = -.4;
 
-//         var Hunter = {
-//             color: "orange",
-//             x: Math.round(Math.random() * (canvas.width * .90)),
-//             y: Math.round(Math.random() * (canvas.height * .90)),
-//            draw: function() {
-//               ctx.beginPath(); // this is the ai guy
-//               ctx.fillStyle = this.color;
-//               ctx.arc(this.x, this.y, playerSize, 0, Math.PI * 2);
-//               ctx.fill();
-//               ctx.closePath();
-//             },
-//            movement: function(){
+        //good for random positions: Math.round(Math.random() * (canvas.width * .90))
+
+        let TestEnemy = {
+            id: Enemy1Group.length,
+            color: "orange",
+            x: 2,
+            y: 1.3,
+            z: 1,
+           draw: function() {
+                let testObject = document.createElement('a-entity');
+                testObject.setAttribute("id", "G1Enemy" + this.id);
+                testObject.setAttribute('mixin', 'cube');
+                testObject.setAttribute('position', this.x + " " + this.y + " " + this.z);
+                testObject.setAttribute('material', 'color:' + this.color);
+                //testObject.setAttribute('onclick', this.Clicked(this.id));
+                scene.appendChild(testObject);
+                
+                //testObject.onmouseover = function(){ alert("Yo"); };
+
+                setTimeout(function() {
+                    testObject.parentNode.removeChild(testObject);
+                }, 30);
+                
+            },
+            Clicked: function(id){
+                    
+                //console.log(id);
+                
+                for(var i = 0; i < Enemy1Group.length; i++){
+
+                    if(Enemy1Group[i].id == id){
+
+                        Enemy1Group.splice(i, 1);
+                        //console.log(Enemy1Group);
+                    }
+                }
+
+            },
+           movement: function(){
    
-//                //this will make direct the enemy move in the direction of the player
-//                if(this.x < x){
+               //this will make direct the enemy move in the direction of the player
+               if(this.x < playerX){
                    
-//                    //this.x += 1.6;
-
-//                    if(slowMotion == true){
-
-//                        this.x += (canvas.width) * 0.0015;
-//                    }
-//                    else if(slowMotion == false){
-
-//                        this.x += (canvas.width) * 0.0044;
-//                    } 
+                   this.x += 0.01; //0.02 is a good slow speed
                
-//                }
-//                if(this.x > x){
+               }
+               if(this.x > playerX){
                    
-//                    //this.x -= 1.6;
-
-//                    if(slowMotion == true){
-
-//                        this.x -= (canvas.width) * 0.0015;
-//                    }
-//                    else if(slowMotion == false){
-
-//                        this.x -= (canvas.width) * 0.0044;
-//                    } 
+                   this.x -= 0.01;
                    
-//                }
-//                if(this.y < y){
+               }
+               if(this.z < playerZ){
                    
-//                    //this.y += 1.6;
-
-//                    if(slowMotion == true){
-
-//                        this.y += (canvas.height) * 0.0015;
-//                    }
-//                    else if(slowMotion == false){
-
-//                        this.y += (canvas.height) * 0.0044;
-//                    } 
+                   this.z += 0.01;
                    
-//                }
-//                if(this.y > y){
+               }
+               if(this.z > playerZ){
                    
-//                    //this.y -= 1.6;
+                   this.z -= 0.01;
 
-//                    if(slowMotion == true){
-
-//                        this.y -= (canvas.height) * 0.0015;
-//                    }
-//                    else if(slowMotion == false){
-
-//                        this.y -= (canvas.height) * 0.0044;
-//                    } 
-//                }
+               }
                
                
-//   }
+        }
             
-// };
+    };
 
-
+        let maxDepth: number = -3;
+        let direction: string = "forward";
 
         setInterval(function(){
 
@@ -144,7 +139,7 @@ export class HomeComponent implements OnInit {
                 }
             }
 
-        },30);
+        },10);
    
 
         console.log(this.aframe);
@@ -162,10 +157,41 @@ export class HomeComponent implements OnInit {
         });
 
         document.querySelector('#enemy1').addEventListener('click', function () {
-            this.setAttribute('material', 'color', '#ffffff');
+
+            this.setAttribute('material', 'color', '#ffffff');//changes the color
+
             let enemy = document.querySelector('#enemy1');
-            enemy.parentNode.removeChild(enemy);
+            enemy.parentNode.removeChild(enemy); //deletes the entity
+
+            Enemy1Group.push(TestEnemy); //pushes the object into the enemy array
+
+            //Enemy1Group[Enemy1Group.length - 1].draw(); //draws the last object in the enemy array
+
+            console.log(Enemy1Group);
+            console.log(scene);
         });
+
+        //main loop
+        setInterval(function(){
+
+            for(var i = 0; i < Enemy1Group.length; i++){
+
+                Enemy1Group[i].draw(); // this will draw all the objects in the array
+                Enemy1Group[i].movement(); // this will run the move function in the enemy object
+
+                // document.querySelector('#G1Enemy' + Enemy1Group[i].id).addEventListener('mouseenter', function () {
+                    
+                //     console.log("Yo");
+                // });
+
+            }
+
+        },30);
+
+        function EnemyClick(id){
+
+            console.log(id);
+        }
 
         //forward direction
 
@@ -235,6 +261,11 @@ export class HomeComponent implements OnInit {
         //   alert(controller[0].buttons[3].value);
         
     }
+
+    // EnemyClick(id){
+        
+    //     console.log(id);
+    // }
 
     over(){
         alert("Worked!");
