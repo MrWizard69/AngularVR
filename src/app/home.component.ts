@@ -137,17 +137,17 @@ export class HomeComponent implements OnInit {
         //console.log(this.aframe);
 
         //this handles all the interactions
-        document.querySelector('#hexagon').addEventListener('mouseenter', function () {
-            this.setAttribute('material', 'color', 'blue');
-        });
+        // document.querySelector('#hexagon').addEventListener('mouseenter', function () {
+        //     this.setAttribute('material', 'color', 'blue');
+        // });
         
-        document.querySelector('#hexagon').addEventListener('mouseleave', function () {
-            this.setAttribute('material', 'color', '#EF2D5E');
-        });
+        // document.querySelector('#hexagon').addEventListener('mouseleave', function () {
+        //     this.setAttribute('material', 'color', '#EF2D5E');
+        // });
 
-        document.querySelector('#hexagon').addEventListener('click', function () {
-            this.setAttribute('material', 'color', '#ffffff');
-        });
+        // document.querySelector('#hexagon').addEventListener('click', function () {
+        //     this.setAttribute('material', 'color', '#ffffff');
+        // });
 
         document.querySelector('#start').addEventListener('click', function () {
 
@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
         //main loop to make everything move and stuff
         setInterval(function(){
 
-            for(var i = 0; i < Enemy1Group.length; i++){
+            for(let i = 0; i < Enemy1Group.length; i++){
 
                 Enemy1Group[i].movement(); // this will run the move function in the enemy object
 
