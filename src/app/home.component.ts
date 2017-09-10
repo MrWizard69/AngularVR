@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
     elem: any;
     aframe: any;
     timeout: any;
+    
 
   title = 'Home Page';
 
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
         let cursor = document.querySelector('.cursor');
 
         let Enemy1Group = [];
+        let EnemyCount: number = -1;
 
         //console.log(cursor);    
 
@@ -47,65 +49,54 @@ export class HomeComponent implements OnInit {
         //good for random positions: Math.round(Math.random() * (canvas.width * .90))
 
         let TestEnemy = {
-            id: Enemy1Group.length,
+            id: EnemyCount += 1,
             color: "orange",
             x: 2,
             y: 1.3,
             z: 1,
            draw: function() {
                 let testObject = document.createElement('a-entity');
-                testObject.setAttribute("id", "G1Enemy" + this.id);
+                testObject.setAttribute("class", "G1Enemy");
+                testObject.setAttribute("id", this.id);
                 testObject.setAttribute('mixin', 'cube');
                 testObject.setAttribute('position', this.x + " " + this.y + " " + this.z);
                 testObject.setAttribute('material', 'color:' + this.color);
-                //testObject.setAttribute('onclick', this.Clicked(this.id));
+                
                 scene.appendChild(testObject);
                 
-                //testObject.onmouseover = function(){ alert("Yo"); };
-
-                setTimeout(function() {
-                    testObject.parentNode.removeChild(testObject);
-                }, 30);
-                
             },
-            Clicked: function(id){
-                    
-                //console.log(id);
-                
+            movement: function(){
+
                 for(var i = 0; i < Enemy1Group.length; i++){
 
-                    if(Enemy1Group[i].id == id){
-
-                        Enemy1Group.splice(i, 1);
-                        //console.log(Enemy1Group);
+                    let element = document.getElementsByClassName("G1Enemy")[i];
+                    
+                    //this will make direct the enemy move in the direction of the player
+                    if(this.x < playerX){
+                                    
+                        this.x += 0.005; //0.02 is a good slow speed
+                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
+                                
                     }
-                }
-
-            },
-           movement: function(){
-   
-               //this will make direct the enemy move in the direction of the player
-               if(this.x < playerX){
-                   
-                   this.x += 0.01; //0.02 is a good slow speed
-               
-               }
-               if(this.x > playerX){
-                   
-                   this.x -= 0.01;
-                   
-               }
-               if(this.z < playerZ){
-                   
-                   this.z += 0.01;
-                   
-               }
-               if(this.z > playerZ){
-                   
-                   this.z -= 0.01;
-
-               }
-               
+                    if(this.x > playerX){
+                                    
+                        this.x -= 0.005;
+                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
+                                    
+                    }
+                    if(this.z < playerZ){
+                                    
+                        this.z += 0.005;
+                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
+                                    
+                    }
+                    if(this.z > playerZ){
+                                    
+                        this.z -= 0.005;
+                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
+                 
+                    }
+                }            
                
         }
             
@@ -156,33 +147,53 @@ export class HomeComponent implements OnInit {
             this.setAttribute('material', 'color', '#ffffff');
         });
 
-        document.querySelector('#enemy1').addEventListener('click', function () {
+        document.querySelector('#start').addEventListener('click', function () {
 
             this.setAttribute('material', 'color', '#ffffff');//changes the color
-
-            let enemy = document.querySelector('#enemy1');
-            enemy.parentNode.removeChild(enemy); //deletes the entity
+            this.parentNode.removeChild(this);//deletes the entity
 
             Enemy1Group.push(TestEnemy); //pushes the object into the enemy array
+            Enemy1Group[EnemyCount].draw(); //draws the last object in the enemy array
 
-            //Enemy1Group[Enemy1Group.length - 1].draw(); //draws the last object in the enemy array
+            //console.log(Enemy1Group);
+            //console.log(scene);
+            //console.log(document.querySelector('.G1Enemy'));
 
-            console.log(Enemy1Group);
-            console.log(scene);
+            document.querySelector('.G1Enemy').addEventListener('click', function () {
+
+                this.setAttribute('material', 'color', '#ffffff');
+                Enemy1Group.splice(this.id, 1);
+                //console.log(Enemy1Group);
+                this.parentNode.removeChild(this);
+                //console.log(this.id);
+    
+            });
+
+            
+            
         });
+
+
+        
+
+        // let EnemyList = document.querySelectorAll('.G1Enemy')
+
+        // console.log(EnemyList);
+
+        
+
+        
+
+        //console.log(document.querySelector('.G1Enemy'));
 
         //main loop
         setInterval(function(){
 
             for(var i = 0; i < Enemy1Group.length; i++){
 
-                Enemy1Group[i].draw(); // this will draw all the objects in the array
+                //Enemy1Group[i].draw(); // this will draw all the objects in the array
                 Enemy1Group[i].movement(); // this will run the move function in the enemy object
-
-                // document.querySelector('#G1Enemy' + Enemy1Group[i].id).addEventListener('mouseenter', function () {
-                    
-                //     console.log("Yo");
-                // });
+                //Enemy1Group[i].Clicked(Enemy1Group[i].id);
 
             }
 
@@ -191,6 +202,7 @@ export class HomeComponent implements OnInit {
         function EnemyClick(id){
 
             console.log(id);
+            alert("Click!");
         }
 
         //forward direction
