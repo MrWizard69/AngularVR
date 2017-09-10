@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(){
         
+        //document where and what everything is for later use.
         console.log("You are on the home page");
 
         let scene = document.getElementById('Scene');
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit {
         let wandZ: number = -.4;
 
         //good for random positions: Math.round(Math.random() * (canvas.width * .90))
-
+        //This is the first enemy object
         let TestEnemy = {
             id: EnemyCount += 1,
             color: "orange",
@@ -102,6 +103,7 @@ export class HomeComponent implements OnInit {
             
     };
 
+        //this controlls the cursors depth of selection
         let maxDepth: number = -3;
         let direction: string = "forward";
 
@@ -132,9 +134,9 @@ export class HomeComponent implements OnInit {
 
         },10);
    
+        //console.log(this.aframe);
 
-        console.log(this.aframe);
-
+        //this handles all the interactions
         document.querySelector('#hexagon').addEventListener('mouseenter', function () {
             this.setAttribute('material', 'color', 'blue');
         });
@@ -173,37 +175,16 @@ export class HomeComponent implements OnInit {
             
         });
 
-
-        
-
-        // let EnemyList = document.querySelectorAll('.G1Enemy')
-
-        // console.log(EnemyList);
-
-        
-
-        
-
-        //console.log(document.querySelector('.G1Enemy'));
-
-        //main loop
+        //main loop to make everything move and stuff
         setInterval(function(){
 
             for(var i = 0; i < Enemy1Group.length; i++){
 
-                //Enemy1Group[i].draw(); // this will draw all the objects in the array
                 Enemy1Group[i].movement(); // this will run the move function in the enemy object
-                //Enemy1Group[i].Clicked(Enemy1Group[i].id);
 
             }
 
         },30);
-
-        function EnemyClick(id){
-
-            console.log(id);
-            alert("Click!");
-        }
 
         //forward direction
 
@@ -273,11 +254,6 @@ export class HomeComponent implements OnInit {
         //   alert(controller[0].buttons[3].value);
         
     }
-
-    // EnemyClick(id){
-        
-    //     console.log(id);
-    // }
 
     over(){
         alert("Worked!");
