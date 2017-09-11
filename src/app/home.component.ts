@@ -52,11 +52,16 @@ export class HomeComponent implements OnInit {
         let TestEnemy = {
             id: EnemyCount += 1,
             color: "orange",
-            x: 2,
+            x: Math.floor((Math.random() * -10) + 5),//2,
             y: 1.3,
-            z: 1,
+            z: Math.floor((Math.random() * -10) + 5),//1,
            draw: function() {
                 let testObject = document.createElement('a-entity');
+
+                this.id = EnemyCount += 1;
+                this.x = Math.floor((Math.random() * -10) + 5);
+                this.z = Math.floor((Math.random() * -10) + 5);
+
                 testObject.setAttribute("class", "G1Enemy");
                 testObject.setAttribute("id", this.id);
                 testObject.setAttribute('mixin', 'cube');
@@ -104,7 +109,7 @@ export class HomeComponent implements OnInit {
     };
 
         //this controlls the cursors depth of selection
-        let maxDepth: number = -3;
+        let maxDepth: number = -5;
         let direction: string = "forward";
 
         setInterval(function(){
@@ -132,7 +137,7 @@ export class HomeComponent implements OnInit {
                 }
             }
 
-        },10);
+        },5);
    
         //console.log(this.aframe);
 
@@ -151,40 +156,66 @@ export class HomeComponent implements OnInit {
 
         document.querySelector('#start').addEventListener('click', function () {
 
-            this.setAttribute('material', 'color', '#ffffff');//changes the color
+            //this.setAttribute('material', 'color', '#ffffff');//changes the color
             this.parentNode.removeChild(this);//deletes the entity
 
-            Enemy1Group.push(TestEnemy); //pushes the object into the enemy array
-            Enemy1Group[EnemyCount].draw(); //draws the last object in the enemy array
+            
 
             //console.log(Enemy1Group);
             //console.log(scene);
             //console.log(document.querySelector('.G1Enemy'));
 
-            document.querySelector('.G1Enemy').addEventListener('click', function () {
-
-                this.setAttribute('material', 'color', '#ffffff');
-                Enemy1Group.splice(this.id, 1);
-                //console.log(Enemy1Group);
-                this.parentNode.removeChild(this);
-                //console.log(this.id);
-    
-            });
-
+            
+            Enemy1Loop();
+            //EnemyMovement();
             
             
         });
 
-        //main loop to make everything move and stuff
-        setInterval(function(){
+        function Enemy1Loop(){
 
-            for(let i = 0; i < Enemy1Group.length; i++){
+            setInterval(function(){
 
-                Enemy1Group[i].movement(); // this will run the move function in the enemy object
+                Enemy1Group.push(TestEnemy); //pushes the object into the enemy array
+                Enemy1Group[EnemyCount].draw(); //draws the last object in the enemy array
 
-            }
+                 document.querySelector('.G1Enemy').addEventListener('click', function () {
 
-        },30);
+                    console.log(this.id);
+                    this.setAttribute('material', 'color', '#ffffff');
+                    this.parentNode.removeChild(this);
+                    Enemy1Group.splice(this.id, 1);
+                    //console.log(Enemy1Group);
+                    
+                    //
+    
+                });
+
+                
+
+            },4000);
+            console.log("Enemy1Loop Hit");
+        }
+
+        function EnemyMovement(){
+
+            //main loop to make everything move and stuff
+            setInterval(function(){
+
+                for(let i = 0; i < Enemy1Group.length; i++){
+
+                    Enemy1Group[i].movement(); // this will run the move function in the enemy object
+
+                }
+
+            },30);
+            console.log("EnemyMovement Hit");
+        }
+
+
+       
+
+        
 
         //forward direction
 
