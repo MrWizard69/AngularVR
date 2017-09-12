@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
         //good for random positions: Math.round(Math.random() * (canvas.width * .90))
         //This is the first enemy object
         let TestEnemy = {
-            id: EnemyCount += 1,
+            id: 0,
             color: "orange",
             x: Math.floor((Math.random() * -10) + 5),//2,
             y: 1.3,
@@ -58,18 +58,54 @@ export class HomeComponent implements OnInit {
            draw: function() {
                 let testObject = document.createElement('a-entity');
 
-                this.id = EnemyCount += 1;
-                this.x = Math.floor((Math.random() * -10) + 5);
-                this.z = Math.floor((Math.random() * -10) + 5);
+                //this.id = EnemyCount += 1;
+                //this.x = Math.floor((Math.random() * -10) + 5);
+                //this.z = Math.floor((Math.random() * -10) + 5);
 
                 testObject.setAttribute("class", "G1Enemy");
-                testObject.setAttribute("id", this.id);
+                testObject.setAttribute("id", "Enemy-" + this.id);
                 testObject.setAttribute('mixin', 'cube');
                 testObject.setAttribute('position', this.x + " " + this.y + " " + this.z);
                 testObject.setAttribute('material', 'color:' + this.color);
                 
                 scene.appendChild(testObject);
                 
+            },
+            events: function(){
+
+                document.querySelector('#Enemy-' + this.id).addEventListener('click', function () { //mouseenter click
+                    //this.setAttribute('material', 'color', 'blue');
+
+                    let currentId: number = this.id.split('-')[1];
+
+                    console.log(currentId);
+
+                    //console.log(this.id);
+                    //this.draw = null;
+                    
+                    //Enemy1Group.splice(currentId, 1);
+                    this.parentNode.removeChild(this); // the enemy array is not getting cleared yet
+                    //Enemy1Group.splice(currentId, 1);
+
+                    for(let i = 0; i < Enemy1Group.length; i++){
+
+                        if(Enemy1Group[i].id == currentId){
+
+                            console.log(i);
+                            console.log(Enemy1Group[i]);
+                            //Enemy1Group.splice(i, 1); // try this future Jordan
+                        }
+                    }                 
+                    
+                    //console.log(Enemy1Group[currentId]);
+                    //console.log(Enemy1Group);
+
+                    
+                });
+                
+                // document.querySelector('#Enemy-' + this.id).addEventListener('mouseleave', function () {
+                //     this.setAttribute('material', 'color', 'orange');
+                // });
             },
             movement: function(){
 
@@ -137,7 +173,7 @@ export class HomeComponent implements OnInit {
                 }
             }
 
-        },5);
+        },10);
    
         //console.log(this.aframe);
 
@@ -154,42 +190,64 @@ export class HomeComponent implements OnInit {
         //     this.setAttribute('material', 'color', '#ffffff');
         // });
 
-        document.querySelector('#start').addEventListener('click', function () {
+        document.querySelector('#start').addEventListener('click', function () { //mouseenter click
 
             //this.setAttribute('material', 'color', '#ffffff');//changes the color
             this.parentNode.removeChild(this);//deletes the entity
 
-            
-
-            //console.log(Enemy1Group);
             //console.log(scene);
-            //console.log(document.querySelector('.G1Enemy'));
 
             
             Enemy1Loop();
             //EnemyMovement();
-            
-            
+                      
         });
 
         function Enemy1Loop(){
 
             setInterval(function(){
+                EnemyCount += 1;
+                //console.log(EnemyCount);
 
-                Enemy1Group.push(TestEnemy); //pushes the object into the enemy array
-                Enemy1Group[EnemyCount].draw(); //draws the last object in the enemy array
+                let clone = Object.assign({}, TestEnemy);
+                clone.id = EnemyCount;
+                clone.x = Math.floor((Math.random() * -10) + 5);
+                clone.z = Math.floor((Math.random() * -10) + 5);
+                clone.color = "orange";
 
-                 document.querySelector('.G1Enemy').addEventListener('click', function () {
+                console.log(clone);
+                
+                //TestEnemy.id = EnemyCount;
+                Enemy1Group.push(clone); //pushes the object into the enemy array
 
-                    console.log(this.id);
-                    this.setAttribute('material', 'color', '#ffffff');
-                    this.parentNode.removeChild(this);
-                    Enemy1Group.splice(this.id, 1);
-                    //console.log(Enemy1Group);
+                Enemy1Group[clone.id].draw(); //draws the last object in the enemy array
+
+                Enemy1Group[clone.id].events();
+
+                //console.log(document.querySelector('#Enemy-' + clone.id));
+
+                //  document.querySelector('.G1Enemy').addEventListener('mouseenter', function () { //mouseenter click
+
+                //     console.log(this.id);
+                //     this.setAttribute('material', 'color', '#ffffff');
+                //     this.parentNode.removeChild(this);
+                //     Enemy1Group.splice(this.id, 1);
+                //     //console.log(Enemy1Group);
                     
-                    //
+                //     //
     
-                });
+                // });
+
+                // document.querySelector('.G1Enemy').addEventListener('mouseenter', function () {
+                //     this.setAttribute('material', 'color', 'blue');
+                //     console.log(this.id.split('-')[1]);
+                // });
+                
+                // document.querySelector('.G1Enemy').addEventListener('mouseleave', function () {
+                //     this.setAttribute('material', 'color', 'orange');
+                // });
+
+                //console.log(document.querySelector('.G1Enemy'));
 
                 
 
