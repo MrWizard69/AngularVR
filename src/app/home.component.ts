@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
                 }
             }
 
-        },10);
+        },5);
    
         //console.log(this.aframe);
 
