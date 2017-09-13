@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit {
         let wandY: number = -1.5;
         let wandZ: number = -.4;
 
-        //good for random positions: Math.round(Math.random() * (canvas.width * .90))
         //This is the first enemy object
         let TestEnemy = {
             id: 0,
@@ -55,92 +54,6 @@ export class HomeComponent implements OnInit {
             x: Math.floor((Math.random() * -10) + 5),//2,
             y: 1.3,
             z: Math.floor((Math.random() * -10) + 5),//1,
-           draw: function() {
-                let testObject = document.createElement('a-entity');
-
-                //this.id = EnemyCount += 1;
-                //this.x = Math.floor((Math.random() * -10) + 5);
-                //this.z = Math.floor((Math.random() * -10) + 5);
-
-                testObject.setAttribute("class", "G1Enemy");
-                testObject.setAttribute("id", "Enemy-" + this.id);
-                testObject.setAttribute('mixin', 'cube');
-                testObject.setAttribute('position', this.x + " " + this.y + " " + this.z);
-                testObject.setAttribute('material', 'color:' + this.color);
-                
-                scene.appendChild(testObject);
-                
-            },
-            events: function(){
-
-                document.querySelector('#Enemy-' + this.id).addEventListener('click', function () { //mouseenter click
-                    //this.setAttribute('material', 'color', 'blue');
-
-                    let currentId: number = this.id.split('-')[1];
-
-                    console.log(currentId);
-
-                    //console.log(this.id);
-                    //this.draw = null;
-                    
-                    //Enemy1Group.splice(currentId, 1);
-                    this.parentNode.removeChild(this); // the enemy array is not getting cleared yet
-                    //Enemy1Group.splice(currentId, 1);
-
-                    for(let i = 0; i < Enemy1Group.length; i++){
-
-                        if(Enemy1Group[i].id == currentId){
-
-                            console.log(i);
-                            console.log(Enemy1Group[i]);
-                            //Enemy1Group.splice(i, 1); // try this future Jordan
-                        }
-                    }                 
-                    
-                    //console.log(Enemy1Group[currentId]);
-                    //console.log(Enemy1Group);
-
-                    
-                });
-                
-                // document.querySelector('#Enemy-' + this.id).addEventListener('mouseleave', function () {
-                //     this.setAttribute('material', 'color', 'orange');
-                // });
-            },
-            movement: function(){
-
-                for(var i = 0; i < Enemy1Group.length; i++){
-
-                    let element = document.getElementsByClassName("G1Enemy")[i];
-                    
-                    //this will make direct the enemy move in the direction of the player
-                    if(this.x < playerX){
-                                    
-                        this.x += 0.005; //0.02 is a good slow speed
-                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
-                                
-                    }
-                    if(this.x > playerX){
-                                    
-                        this.x -= 0.005;
-                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
-                                    
-                    }
-                    if(this.z < playerZ){
-                                    
-                        this.z += 0.005;
-                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
-                                    
-                    }
-                    if(this.z > playerZ){
-                                    
-                        this.z -= 0.005;
-                        element.setAttribute('position', this.x + " " + this.y + " " + this.z);
-                 
-                    }
-                }            
-               
-        }
             
     };
 
@@ -197,9 +110,8 @@ export class HomeComponent implements OnInit {
 
             //console.log(scene);
 
-            
             Enemy1Loop();
-            //EnemyMovement();
+            EnemyMovement();
                       
         });
 
@@ -215,66 +127,105 @@ export class HomeComponent implements OnInit {
                 clone.z = Math.floor((Math.random() * -10) + 5);
                 clone.color = "orange";
 
-                console.log(clone);
+                //console.log(clone);
                 
                 //TestEnemy.id = EnemyCount;
                 Enemy1Group.push(clone); //pushes the object into the enemy array
 
-                Enemy1Group[clone.id].draw(); //draws the last object in the enemy array
+                //this will setup the new enemy
+                let testObject = document.createElement('a-entity');
 
-                Enemy1Group[clone.id].events();
+                testObject.setAttribute("class", "G1Enemy");
+                testObject.setAttribute("id", "Enemy-" + clone.id);
+                testObject.setAttribute('mixin', 'cube');
+                testObject.setAttribute('position', clone.x + " " + clone.y + " " + clone.z);
+                testObject.setAttribute('material', 'color:' + clone.color);
+                
+                scene.appendChild(testObject); // this will draw the new enemy to the room
+
+                console.log(Enemy1Group);
+
+                //Enemy1Group[clone.id].events();
+
+                //this eventListener will be dynamically created to target each object in the array
+                document.querySelector('#Enemy-' + clone.id).addEventListener('click', function () { //mouseenter click
+                    //this.setAttribute('material', 'color', 'blue');
+
+                    let currentId: number = this.id.split('-')[1]; //grabs the id of the element and splits the id of the
+                                                                  //object in the array to be spliced
+                    console.log(currentId);
+
+                    RemoveEnemy(currentId);
+                    
+                });
 
                 //console.log(document.querySelector('#Enemy-' + clone.id));
-
-                //  document.querySelector('.G1Enemy').addEventListener('mouseenter', function () { //mouseenter click
-
-                //     console.log(this.id);
-                //     this.setAttribute('material', 'color', '#ffffff');
-                //     this.parentNode.removeChild(this);
-                //     Enemy1Group.splice(this.id, 1);
-                //     //console.log(Enemy1Group);
-                    
-                //     //
-    
-                // });
-
-                // document.querySelector('.G1Enemy').addEventListener('mouseenter', function () {
-                //     this.setAttribute('material', 'color', 'blue');
-                //     console.log(this.id.split('-')[1]);
-                // });
-                
-                // document.querySelector('.G1Enemy').addEventListener('mouseleave', function () {
-                //     this.setAttribute('material', 'color', 'orange');
-                // });
-
-                //console.log(document.querySelector('.G1Enemy'));
-
-                
+                //console.log(document.querySelector('.G1Enemy'));               
 
             },4000);
-            console.log("Enemy1Loop Hit");
+
         }
+
+        //this is the main loop to make everything move and stuff
 
         function EnemyMovement(){
 
-            //main loop to make everything move and stuff
             setInterval(function(){
 
-                for(let i = 0; i < Enemy1Group.length; i++){
 
-                    Enemy1Group[i].movement(); // this will run the move function in the enemy object
+                for(var i = 0; i < Enemy1Group.length; i++){
 
+                    let element = document.getElementsByClassName("G1Enemy")[i]; //grabs ALL the elements
+                        
+                    //this will make direct the enemy move in the direction of the player
+                    if(Enemy1Group[i].x < playerX){
+                                        
+                        Enemy1Group[i].x += 0.005; //0.02 is a good slow speed
+                        element.setAttribute('position', Enemy1Group[i].x + " " + Enemy1Group[i].y + " " + Enemy1Group[i].z); //update the attributes with
+                                                                                                                            //the new positions
+                    }
+                    if(Enemy1Group[i].x > playerX){
+                                        
+                        Enemy1Group[i].x -= 0.005;
+                        element.setAttribute('position', Enemy1Group[i].x + " " + Enemy1Group[i].y + " " + Enemy1Group[i].z); 
+                                        
+                    }
+                    if(Enemy1Group[i].z < playerZ){
+                                        
+                        Enemy1Group[i].z += 0.005;
+                        element.setAttribute('position', Enemy1Group[i].x + " " + Enemy1Group[i].y + " " + Enemy1Group[i].z);
+                                        
+                    }
+                    if(Enemy1Group[i].z > playerZ){
+                                        
+                        Enemy1Group[i].z -= 0.005;
+                        element.setAttribute('position', Enemy1Group[i].x + " " + Enemy1Group[i].y + " " + Enemy1Group[i].z);
+                    
+                    }
                 }
 
             },30);
-            console.log("EnemyMovement Hit");
         }
 
+        //this function will find the id with the object, splice it out and then remove the image
+        function RemoveEnemy(thisId){
 
+            for(let i = 0; i < Enemy1Group.length; i++){
+
+                if(Enemy1Group[i].id == thisId){
+
+                    Enemy1Group.splice(i, 1);
+                }
+            }
+            
+            let thisEnemy = document.querySelector('#Enemy-' + thisId);
+
+            console.log(thisEnemy);
+
+            thisEnemy.parentNode.removeChild(thisEnemy);
+            
+        }
        
-
-        
-
         //forward direction
 
         // document.querySelector('#ForwardBox').addEventListener('click', function () {
