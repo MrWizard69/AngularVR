@@ -33,11 +33,11 @@ export class HomeComponent implements OnInit {
         let Enemy1Group = [];
         let EnemyCount: number = -1;
 
-        //console.log(cursor);    
+        console.log(cursor);    
 
-        let cursorX: number = .1;
+        let cursorX: number = 0;
         let cursorY: number = 0;
-        let cursorZ: number = -2;
+        let cursorZ: number = -3;
 
         let playerX: number = 0;
         let playerY: number = 0;
@@ -58,35 +58,35 @@ export class HomeComponent implements OnInit {
     };
 
         //this controlls the cursors depth of selection
-        let maxDepth: number = -5;
-        let direction: string = "forward";
+        //let maxDepth: number = -5;
+        //let direction: string = "forward";
 
-        setInterval(function(){
+        // setInterval(function(){
 
-            if(direction == "forward"){
+        //     if(direction == "forward"){
 
-                cursorZ--;
-                cursorY = -1;
-                cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
+        //         cursorZ--;
+        //         //cursorY = -1;
+        //         cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
 
-                if(cursorZ < maxDepth){
+        //         if(cursorZ < maxDepth){
 
-                    direction = "backward";
-                }
-            }
-            if(direction == "backward"){
+        //             direction = "backward";
+        //         }
+        //     }
+        //     if(direction == "backward"){
 
-                cursorZ++;
-                cursorY = -1;
-                cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
+        //         cursorZ++;
+        //         //cursorY = -1;
+        //         cursor.setAttribute('position', + cursorX + ' ' + cursorY + ' ' + cursorZ);
 
-                if(cursorZ > -2){
+        //         if(cursorZ > -1.5){ // was -2
 
-                    direction = "forward";
-                }
-            }
+        //             direction = "forward";
+        //         }
+        //     }
 
-        },5);
+        // },30);
    
         //console.log(this.aframe);
 
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
         //     this.setAttribute('material', 'color', '#ffffff');
         // });
 
-        document.querySelector('#start').addEventListener('click', function () { //mouseenter click
+        document.querySelector('#start').addEventListener('click', function () { //mouseenter click touchstart buttonchanged  triggerdown
 
             //this.setAttribute('material', 'color', '#ffffff');//changes the color
             this.parentNode.removeChild(this);//deletes the entity
@@ -125,7 +125,17 @@ export class HomeComponent implements OnInit {
                 clone.id = EnemyCount;
                 clone.x = Math.floor((Math.random() * -10) + 5);
                 clone.z = Math.floor((Math.random() * -10) + 5);
+                clone.y = 1.7
                 clone.color = "orange";
+
+                if(clone.x > -1 && clone.x < 2){
+
+                    clone.x = 3;
+                }
+                if(clone.z > -1 && clone.z < 2){
+
+                    clone.z = -3;
+                }
 
                 //console.log(clone);
                 
@@ -140,6 +150,13 @@ export class HomeComponent implements OnInit {
                 testObject.setAttribute('mixin', 'cube');
                 testObject.setAttribute('position', clone.x + " " + clone.y + " " + clone.z);
                 testObject.setAttribute('material', 'color:' + clone.color);
+                testObject.setAttribute('geometry', 'primitive:box');
+                testObject.setAttribute('geometry', 'height:1');
+                testObject.setAttribute('geometry', 'width:1');
+                testObject.setAttribute('geometry', 'depth:1');
+                //testObject.setAttribute('width','.7');
+                //testObject.setAttribute('height','.7');
+                //testObject.setAttribute('depth','.7');
                 
                 scene.appendChild(testObject); // this will draw the new enemy to the room
 
@@ -207,7 +224,7 @@ export class HomeComponent implements OnInit {
             },30);
         }
 
-        //this function will find the id with the object, splice it out and then remove the image
+        //this function will find the id with the object, splice it out of the array and then remove the image
         function RemoveEnemy(thisId){
 
             for(let i = 0; i < Enemy1Group.length; i++){
@@ -248,8 +265,14 @@ export class HomeComponent implements OnInit {
 
         //this is the gamepad thing
 
-        //   let controller = navigator.getGamepads();
-        //   console.log(controller);
+          let controller = navigator.getGamepads();
+          
+          if(controller == undefined){
+
+            controller.length = 0;
+          }
+          //console.log(controller);
+          //alert(controller);
 
         //  for(var i = 0; i < controller.length; i++){
 
@@ -259,32 +282,35 @@ export class HomeComponent implements OnInit {
         //     }
         //  }
 
-        //This is an experiment for a GearVR controller
+        //This is an experiment for the GearVR controller
 
-        // setInterval(function(){
+        setInterval(function(){
 
-        //     for(var i = 0; i < controller.length; i++){
+            //if(controller[i] != null){
 
-        //         if(controller[i] != null){
+                for(var i = 0; i < controller.length; i++){
+                    
+                    //buttons[0] is the D-Pad on GearVR
+                    if(controller[1].buttons[1].pressed == true){ //this is the trigger on the GearVR
+                            
+                        document.querySelector('.success').setAttribute('color', 'yellow');
+                        document.querySelector('.cursor').setAttribute('cursor', 'fuse:true');
+                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:50');
+                            
+                    }
+                    if(controller[1].buttons[1].pressed == false){
+                            
+                        document.querySelector('.success').setAttribute('color', 'white');
+                        document.querySelector('.cursor').setAttribute('cursor', 'fuse:false');
+                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:100');
+                            
+                    }
 
-        //             //alert(controller[i].buttons.length);
+            //alert("controller " + i + " is connected; controller map " + controller[i].mapping + "; controller button1 " + controller[i].buttons[0].pressed);
+        //}
+    }
 
-        //             // if(controller[i].buttons[0].pressed == true){
-
-        //             //     alert("button " + i);
-        //             // }
-        //             // if(controller[i].buttons[1].pressed == true){
-
-        //             //     alert("button " + i);
-        //             // }
-        //             // if(controller[i].buttons[2].pressed == true){
-
-        //             //     alert("button " + i);
-        //             // }
-        //     }
-        //  }
-
-        // },30);
+        },30);
 
           
 
