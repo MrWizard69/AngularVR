@@ -11,9 +11,13 @@ export class HomeComponent implements OnInit {
     elem: any;
     aframe: any;
     timeout: any;
-    
+
+    //currentTarget: number = 0;
+    //currentIdString: string = "";
+    //triggered: boolean = false;
 
   title = 'Home Page';
+  
 
   constructor(ref: ElementRef) {
         this.elem = ref.nativeElement;
@@ -29,6 +33,11 @@ export class HomeComponent implements OnInit {
         this.aframe = this.elem.querySelector('a-scene');
 
         let cursor = document.querySelector('.cursor');
+
+        let triggered: boolean = false;
+        let currentIdString: string = "";
+        let currentTarget: number = 0;
+        let triggerHold: boolean = false;
 
         let Enemy1Group = [];
         let EnemyCount: number = -1;
@@ -46,6 +55,8 @@ export class HomeComponent implements OnInit {
         let wandX: number = .1;
         let wandY: number = -1.5;
         let wandZ: number = -.4;
+
+        
 
         //This is the first enemy object
         let TestEnemy = {
@@ -103,17 +114,46 @@ export class HomeComponent implements OnInit {
         //     this.setAttribute('material', 'color', '#ffffff');
         // });
 
-        document.querySelector('#start').addEventListener('click', function () { //mouseenter click touchstart buttonchanged  triggerdown
+        document.querySelector('#start-1').addEventListener('mouseenter', function () { //mouseenter
+            this.setAttribute('material', 'color', 'blue');
+            console.log(this.id);
+            let parts = this.id.split('-');
+            //console.log(parts[1]);
+            //currentTarget = parts[1];
+            currentIdString = this.id;
 
-            //this.setAttribute('material', 'color', '#ffffff');//changes the color
-            this.parentNode.removeChild(this);//deletes the entity
+            if(triggered == true && triggerHold == false){
 
-            //console.log(scene);
+                let thisEnemy = document.querySelector('#start-1');
+                thisEnemy.parentNode.removeChild(thisEnemy);
+                Enemy1Loop();
+                EnemyMovement();
 
-            Enemy1Loop();
-            EnemyMovement();
-                      
+            }
         });
+        
+        document.querySelector('#start-1').addEventListener('mouseleave', function () {
+            this.setAttribute('material', 'color', 'green');
+
+            currentIdString = "";
+            
+        });
+
+        // document.querySelector('#start-1').addEventListener('click', function () { //mouseenter mousemove click touchstart buttonchanged  triggerdown
+
+        //     //this.setAttribute('material', 'color', '#ffffff');//changes the color
+
+        //     //if(this.triggered == true){
+
+        //         this.parentNode.removeChild(this);//deletes the entity
+                
+        //         //console.log(scene);
+                
+        //         Enemy1Loop();
+        //         EnemyMovement();
+        //     //}
+                      
+        // });
 
         function Enemy1Loop(){
 
@@ -165,14 +205,40 @@ export class HomeComponent implements OnInit {
                 //Enemy1Group[clone.id].events();
 
                 //this eventListener will be dynamically created to target each object in the array
-                document.querySelector('#Enemy-' + clone.id).addEventListener('click', function () { //mouseenter click
-                    //this.setAttribute('material', 'color', 'blue');
+                // document.querySelector('#Enemy-' + clone.id).addEventListener('click', function () { //mouseenter click mousemove 
+                //     //this.setAttribute('material', 'color', 'blue');
 
-                    let currentId: number = this.id.split('-')[1]; //grabs the id of the element and splits the id of the
-                                                                  //object in the array to be spliced
-                    console.log(currentId);
+                //     //if(this.triggered == true){
 
-                    RemoveEnemy(currentId);
+                //         let currentId: number = this.id.split('-')[1]; //grabs the id of the element and splits the id of the
+                //         //object in the array to be spliced
+                //         console.log(currentId);
+
+                //         RemoveEnemy(currentId);
+
+                //     //}
+                    
+                // });
+
+                document.querySelector('#Enemy-' + clone.id).addEventListener('mouseenter', function () { //mouseenter
+                    this.setAttribute('material', 'color', 'blue');
+                    let parts = this.id.split('-');
+                    currentTarget = parts[1];
+                    currentIdString = this.id;
+        
+                    if(triggered == true && triggerHold == false){
+        
+                        RemoveEnemy(currentTarget);
+        
+                    }
+
+                });
+                
+                document.querySelector('#Enemy-' + clone.id).addEventListener('mouseleave', function () {
+                    this.setAttribute('material', 'color', 'orange');
+                    currentTarget = 0;
+        
+                    currentIdString = "";
                     
                 });
 
@@ -225,7 +291,7 @@ export class HomeComponent implements OnInit {
         }
 
         //this function will find the id with the object, splice it out of the array and then remove the image
-        function RemoveEnemy(thisId){
+        function RemoveEnemy(thisId: number){
 
             for(let i = 0; i < Enemy1Group.length; i++){
 
@@ -241,7 +307,7 @@ export class HomeComponent implements OnInit {
 
             thisEnemy.parentNode.removeChild(thisEnemy);
             
-        }
+        }       
        
         //forward direction
 
@@ -289,28 +355,53 @@ export class HomeComponent implements OnInit {
             //if(controller[i] != null){
 
                 for(var i = 0; i < controller.length; i++){
+
+                    if(controller[i] != null){
                     
                     //buttons[0] is the D-Pad on GearVR
                     if(controller[1].buttons[1].pressed == true){ //this is the trigger on the GearVR
+                        
+                        triggered = true
+                        var event2 = new CustomEvent("mouseenter");
+                        
+                        if(currentIdString == "Enemy-" + currentTarget){
+
+                            //triggerHold = false;
+
+                            document.querySelector('#Enemy-' + currentTarget).dispatchEvent(event2);
+                        }
+
+                        if(currentIdString == "start-1"){
+
+                            //triggerHold = false;
                             
-                        document.querySelector('.success').setAttribute('color', 'yellow');
-                        document.querySelector('.cursor').setAttribute('cursor', 'fuse:true');
-                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:50');
+                            document.querySelector('#start-1').dispatchEvent(event2);
+                        }
+                        
+                        triggerHold = true;
+
+                        //document.querySelector('.cursor').setAttribute('cursor', 'fuse: true');
+                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
                             
                     }
                     if(controller[1].buttons[1].pressed == false){
-                            
-                        document.querySelector('.success').setAttribute('color', 'white');
-                        document.querySelector('.cursor').setAttribute('cursor', 'fuse:false');
-                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:100');
+                        
+                        triggered = false;
+                        triggerHold = false;
+                        //currentTarget = 0;
+                        //currentIdString = "";
+                        //document.querySelector('.success').setAttribute('color', 'white');
+                        //document.querySelector('.cursor').setAttribute('cursor', 'fuse:false');
+                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
                             
                     }
+                }
 
             //alert("controller " + i + " is connected; controller map " + controller[i].mapping + "; controller button1 " + controller[i].buttons[0].pressed);
         //}
     }
 
-        },30);
+        },100);
 
           
 

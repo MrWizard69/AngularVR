@@ -33,31 +33,19 @@
     <a-entity id="player" camera="userHeight: 1.3" look-controls wasd-controls position="0 0 0">
 
 
-        <!-- <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 500;"
-        position="0 0 -2.3"
-        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-        material="color: purple; shader: flat">
+        <!-- <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 15" 
+                position="0 0 -2.5"
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                material="color: purple; shader: flat">
         </a-entity> -->
         <!-- cursor position for new test is 0 0 0; rayOrigin: mouse -->
         <!-- <a-entity tracked-controls="controller: 0; idPrefix: OpenVR;"></a-entity> -->
 
         <a-entity gearvr-controls="model: false;" id="GearVrController" position="0 -2.3 0">
             
-                <!--fuseTimeout:500 -->
-        <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 25;" 
+                <!--fuse: false; fuseTimeout: 25; -->
+        <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 15" 
                 position="0 0 -2.5"
-                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                material="color: purple; shader: flat">
-        </a-entity>
-
-        <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 25;"
-                position="0 0 -2"
-                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                material="color: purple; shader: flat">
-        </a-entity>
-
-        <a-entity class="cursor" cursor="fuse: false; fuseTimeout: 25;"
-                position="0 0 -1.5"
                 geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
                 material="color: purple; shader: flat">
         </a-entity>
@@ -75,7 +63,7 @@
 
     <!-- <a-entity id="hexagon" class="cube" mixin="cube" position="3 1.65 0"></a-entity> -->
 
-    <a-box id="start" material="color: green" width=".7" height=".7" depth=".7" position="2 1.3 2"></a-box>
+    <a-box id="start-1" material="color: green" width=".7" height=".7" depth=".7" position="2 1.3 2"></a-box>
     <!-- <a-entity class="G1Enemy" material="color: orange"  mixin="cube" position="2 1.65 2"></a-entity> -->
     <!-- <a-entity class="G1Enemy" material="color: orange"  mixin="cube" position="-5 1.65 0"></a-entity> -->
 
