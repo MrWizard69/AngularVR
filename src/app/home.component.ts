@@ -114,18 +114,17 @@ export class HomeComponent implements OnInit {
         //     this.setAttribute('material', 'color', '#ffffff');
         // });
 
+
+        //This makes the game start
         document.querySelector('#start-1').addEventListener('mouseenter', function () { //mouseenter
             this.setAttribute('material', 'color', 'blue');
-            console.log(this.id);
-            let parts = this.id.split('-');
-            //console.log(parts[1]);
-            //currentTarget = parts[1];
+
             currentIdString = this.id;
 
             if(triggered == true && triggerHold == false){
 
-                let thisEnemy = document.querySelector('#start-1');
-                thisEnemy.parentNode.removeChild(thisEnemy);
+                let thisThing = document.querySelector('#start-1');
+                thisThing.parentNode.removeChild(thisThing);
                 Enemy1Loop();
                 EnemyMovement();
 
@@ -138,22 +137,6 @@ export class HomeComponent implements OnInit {
             currentIdString = "";
             
         });
-
-        // document.querySelector('#start-1').addEventListener('click', function () { //mouseenter mousemove click touchstart buttonchanged  triggerdown
-
-        //     //this.setAttribute('material', 'color', '#ffffff');//changes the color
-
-        //     //if(this.triggered == true){
-
-        //         this.parentNode.removeChild(this);//deletes the entity
-                
-        //         //console.log(scene);
-                
-        //         Enemy1Loop();
-        //         EnemyMovement();
-        //     //}
-                      
-        // });
 
         function Enemy1Loop(){
 
@@ -170,16 +153,13 @@ export class HomeComponent implements OnInit {
 
                 if(clone.x > -1 && clone.x < 2){
 
-                    clone.x = 3;
+                    clone.x = 4;
                 }
                 if(clone.z > -1 && clone.z < 2){
 
-                    clone.z = -3;
+                    clone.z = -4;
                 }
-
-                //console.log(clone);
                 
-                //TestEnemy.id = EnemyCount;
                 Enemy1Group.push(clone); //pushes the object into the enemy array
 
                 //this will setup the new enemy
@@ -194,36 +174,16 @@ export class HomeComponent implements OnInit {
                 testObject.setAttribute('geometry', 'height:1');
                 testObject.setAttribute('geometry', 'width:1');
                 testObject.setAttribute('geometry', 'depth:1');
-                //testObject.setAttribute('width','.7');
-                //testObject.setAttribute('height','.7');
-                //testObject.setAttribute('depth','.7');
                 
                 scene.appendChild(testObject); // this will draw the new enemy to the room
 
                 console.log(Enemy1Group);
 
-                //Enemy1Group[clone.id].events();
-
-                //this eventListener will be dynamically created to target each object in the array
-                // document.querySelector('#Enemy-' + clone.id).addEventListener('click', function () { //mouseenter click mousemove 
-                //     //this.setAttribute('material', 'color', 'blue');
-
-                //     //if(this.triggered == true){
-
-                //         let currentId: number = this.id.split('-')[1]; //grabs the id of the element and splits the id of the
-                //         //object in the array to be spliced
-                //         console.log(currentId);
-
-                //         RemoveEnemy(currentId);
-
-                //     //}
-                    
-                // });
-
+                //this eventListener will be dynamically created to target each newly created object in the array
                 document.querySelector('#Enemy-' + clone.id).addEventListener('mouseenter', function () { //mouseenter
                     this.setAttribute('material', 'color', 'blue');
-                    let parts = this.id.split('-');
-                    currentTarget = parts[1];
+                    let EnemyId = this.id.split('-');
+                    currentTarget = EnemyId[1];
                     currentIdString = this.id;
         
                     if(triggered == true && triggerHold == false){
@@ -240,10 +200,7 @@ export class HomeComponent implements OnInit {
         
                     currentIdString = "";
                     
-                });
-
-                //console.log(document.querySelector('#Enemy-' + clone.id));
-                //console.log(document.querySelector('.G1Enemy'));               
+                });            
 
             },4000);
 
@@ -337,16 +294,6 @@ export class HomeComponent implements OnInit {
 
             controller.length = 0;
           }
-          //console.log(controller);
-          //alert(controller);
-
-        //  for(var i = 0; i < controller.length; i++){
-
-        //     if(controller[i] != null){
-
-        //         alert("controller " + i + " is connected; controller map " + controller[i].mapping + "; controller button1 " + controller[i].buttons[0].pressed);
-        //     }
-        //  }
 
         //This is an experiment for the GearVR controller
 
@@ -366,14 +313,10 @@ export class HomeComponent implements OnInit {
                         
                         if(currentIdString == "Enemy-" + currentTarget){
 
-                            //triggerHold = false;
-
                             document.querySelector('#Enemy-' + currentTarget).dispatchEvent(event2);
                         }
 
                         if(currentIdString == "start-1"){
-
-                            //triggerHold = false;
                             
                             document.querySelector('#start-1').dispatchEvent(event2);
                         }
@@ -388,8 +331,6 @@ export class HomeComponent implements OnInit {
                         
                         triggered = false;
                         triggerHold = false;
-                        //currentTarget = 0;
-                        //currentIdString = "";
                         //document.querySelector('.success').setAttribute('color', 'white');
                         //document.querySelector('.cursor').setAttribute('cursor', 'fuse:false');
                         //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
