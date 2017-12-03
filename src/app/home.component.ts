@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
         let currentIdString: string = "";
         let currentTarget: number = 0;
         let triggerHold: boolean = false;
+        let isMoving: boolean = false;
 
         let Enemy1Group = [];
         let EnemyCount: number = -1;
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
         let cursorZ: number = -3;
 
         let playerX: number = 0;
-        let playerY: number = 0;
+        let playerY: number = 1.3;
         let playerZ: number = 0;
 
         let wandX: number = .1;
@@ -264,7 +265,163 @@ export class HomeComponent implements OnInit {
 
             thisEnemy.parentNode.removeChild(thisEnemy);
             
-        }       
+        }
+        
+        //camera and move direction
+
+        setInterval(function() {
+
+            if(isMoving == true){
+
+                let pos: any = document.querySelector('#player').getAttribute('position');
+                let rot: any = document.querySelector('#player').getAttribute('rotation');
+                let player: any = document.querySelector('#player');
+                //let rotation: number = 0;
+    
+                if(rot.y > 359){
+    
+                    rot.y = 0;
+                    player.setAttribute('rotation', rot.x + ' ' + rot.y +' ' + rot.z);
+                    
+                }
+                if(rot.y < -359){
+    
+                    rot.y = 0;
+                    player.setAttribute('rotation', rot.x + ' ' + rot.y +' ' + rot.z);
+                }
+    
+                if(rot.y < 16 && rot.y > -1){ // turn left
+    
+                    playerZ -= 0.005;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -1 && rot.y > -16){ // turn right
+    
+                    playerZ -= 0.005;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 55 && rot.y > 16){ // turn left
+    
+                    playerZ -= 0.05;
+                    playerX -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -16 && rot.y > -55){ // turn right
+    
+                    playerZ -= 0.05;
+                    playerX += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 60 && rot.y > 55){ // turn left
+    
+                    playerZ -= 0.05;
+                    playerX -= 0.03;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -55 && rot.y > -60){ // turn right
+    
+                    playerZ -= 0.05;
+                    playerX += 0.03;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 100 && rot.y > 60){ // turn left
+    
+                    playerX -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -60 && rot.y > -100){ // turn right
+    
+                    playerX += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 130 && rot.y > 100){ // turn left
+    
+                    playerZ += 0.05;
+                    playerX -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -100 && rot.y > -130){ // turn right
+    
+                    playerZ += 0.05;
+                    playerX += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 155 && rot.y > 130){ // turn left
+    
+                    playerZ += 0.05;
+                    playerX -= 0.03;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -130 && rot.y > -155){ // turn right
+    
+                    playerZ += 0.05;
+                    playerX += 0.03;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 190 && rot.y > 155){ // turn left
+    
+                    playerZ += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -155 && rot.y > -190){ // turn rght
+    
+                    playerZ += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 225 && rot.y > 190){ // turn left
+    
+                    playerZ += 0.05;
+                    playerX += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -190 && rot.y > -225){ // turn right
+    
+                    playerZ += 0.05;
+                    playerX -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 275 && rot.y > 225){ // turn left
+    
+                    playerX += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -225 && rot.y > -275){ // turn right
+    
+                    playerX -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 310 && rot.y > 275){ // turn left
+    
+                    playerZ -= 0.05;
+                    playerX += 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -275 && rot.y > -310){ // turn right
+    
+                    playerZ -= 0.05;
+                    playerX -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < 359 && rot.y > 310){ // turn left
+    
+                    playerZ -= 0.05;
+                    playerX += 0.03;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+                if(rot.y < -310 && rot.y > -359){ // turn left
+    
+                    playerZ -= 0.05;
+                    playerX -= 0.03;
+                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                }
+    
+                console.log(rot.y);
+                //console.log(pos.x);
+            }
+
+        }, 1000);
+
+        
        
         //forward direction
 
@@ -304,39 +461,48 @@ export class HomeComponent implements OnInit {
                 for(var i = 0; i < controller.length; i++){
 
                     if(controller[i] != null){
+
+                        if(controller[1].buttons[0].pressed == true){
+
+                            isMoving = true;
+                        }
+                        if(controller[1].buttons[0].pressed == false){
+
+                            isMoving = false;
+                        }
                     
-                    //buttons[0] is the D-Pad on GearVR
-                    if(controller[1].buttons[1].pressed == true){ //this is the trigger on the GearVR
-                        
-                        triggered = true
-                        var event2 = new CustomEvent("mouseenter");
-                        
-                        if(currentIdString == "Enemy-" + currentTarget){
+                        //buttons[0] is the D-Pad on GearVR
+                        if(controller[1].buttons[1].pressed == true){ //this is the trigger on the GearVR
+                            
+                            triggered = true
+                            var event2 = new CustomEvent("mouseenter");
+                            
+                            if(currentIdString == "Enemy-" + currentTarget){
 
-                            document.querySelector('#Enemy-' + currentTarget).dispatchEvent(event2);
+                                document.querySelector('#Enemy-' + currentTarget).dispatchEvent(event2);
+                            }
+
+                            if(currentIdString == "start-1"){
+                                
+                                document.querySelector('#start-1').dispatchEvent(event2);
+                            }
+                            
+                            triggerHold = true;
+
+                            //document.querySelector('.cursor').setAttribute('cursor', 'fuse: true');
+                            //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
+                                
                         }
-
-                        if(currentIdString == "start-1"){
+                        if(controller[1].buttons[1].pressed == false){
                             
-                            document.querySelector('#start-1').dispatchEvent(event2);
+                            triggered = false;
+                            triggerHold = false;
+                            //document.querySelector('.success').setAttribute('color', 'white');
+                            //document.querySelector('.cursor').setAttribute('cursor', 'fuse:false');
+                            //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
+                                
                         }
-                        
-                        triggerHold = true;
-
-                        //document.querySelector('.cursor').setAttribute('cursor', 'fuse: true');
-                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
-                            
                     }
-                    if(controller[1].buttons[1].pressed == false){
-                        
-                        triggered = false;
-                        triggerHold = false;
-                        //document.querySelector('.success').setAttribute('color', 'white');
-                        //document.querySelector('.cursor').setAttribute('cursor', 'fuse:false');
-                        //document.querySelector('.cursor').setAttribute('cursor', 'fuseTimeout:15');
-                            
-                    }
-                }
 
             //alert("controller " + i + " is connected; controller map " + controller[i].mapping + "; controller button1 " + controller[i].buttons[0].pressed);
         //}
