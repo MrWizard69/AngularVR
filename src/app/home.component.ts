@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
         let cursorZ: number = -3;
 
         let playerX: number = 0;
-        let playerY: number = 1.3;
+        let playerY: number = 1.6; //1.3
         let playerZ: number = 0;
 
         let wandX: number = .1;
@@ -276,150 +276,154 @@ export class HomeComponent implements OnInit {
                 let pos: any = document.querySelector('#player').getAttribute('position');
                 let rot: any = document.querySelector('#player').getAttribute('rotation');
                 let player: any = document.querySelector('#player');
+                //let wand: any = document.querySelector('#Wand');
+                //playerY = 1.6;
                 //let rotation: number = 0;
+
+                // let thisWand: any = document.querySelector('#Wand');
+                // thisWand.parentNode.removeChild(thisWand);
     
                 if(rot.y > 359){
     
                     rot.y = 0;
-                    player.setAttribute('rotation', rot.x + ' ' + rot.y +' ' + rot.z);
+                    player.setAttribute('rotation', rot.x + ' ' + rot.y + ' ' + rot.z);
                     
                 }
                 if(rot.y < -359){
     
                     rot.y = 0;
-                    player.setAttribute('rotation', rot.x + ' ' + rot.y +' ' + rot.z);
+                    player.setAttribute('rotation', rot.x + ' ' + rot.y + ' ' + rot.z);
                 }
     
-                if(rot.y < 16 && rot.y > -1){ // turn left
+                if(rot.y < 16 && rot.y > -1){ // turn head left
     
-                    playerZ -= 0.005;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    playerZ -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -1 && rot.y > -16){ // turn right
+                if(rot.y < -1 && rot.y > -16){ // turn head right
     
-                    playerZ -= 0.005;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    playerZ -= 0.05;
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 55 && rot.y > 16){ // turn left
+                if(rot.y < 55 && rot.y > 16){ // turn head left
     
                     playerZ -= 0.05;
                     playerX -= 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -16 && rot.y > -55){ // turn right
+                if(rot.y < -16 && rot.y > -55){ // turn head right
     
                     playerZ -= 0.05;
                     playerX += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 60 && rot.y > 55){ // turn left
+                if(rot.y < 60 && rot.y > 55){ // turn head left
     
                     playerZ -= 0.05;
                     playerX -= 0.03;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -55 && rot.y > -60){ // turn right
+                if(rot.y < -55 && rot.y > -60){ // turn head right
     
                     playerZ -= 0.05;
                     playerX += 0.03;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 100 && rot.y > 60){ // turn left
+                if(rot.y < 100 && rot.y > 60){ // turn head left
     
                     playerX -= 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -60 && rot.y > -100){ // turn right
+                if(rot.y < -60 && rot.y > -100){ // turn head right
     
                     playerX += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 130 && rot.y > 100){ // turn left
+                if(rot.y < 130 && rot.y > 100){ // turn head left
     
                     playerZ += 0.05;
                     playerX -= 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -100 && rot.y > -130){ // turn right
+                if(rot.y < -100 && rot.y > -130){ // turn head right
     
                     playerZ += 0.05;
                     playerX += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 155 && rot.y > 130){ // turn left
+                if(rot.y < 155 && rot.y > 130){ // turn head left
     
                     playerZ += 0.05;
                     playerX -= 0.03;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -130 && rot.y > -155){ // turn right
+                if(rot.y < -130 && rot.y > -155){ // turn head right
     
                     playerZ += 0.05;
                     playerX += 0.03;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 190 && rot.y > 155){ // turn left
+                if(rot.y < 190 && rot.y > 155){ // turn head left
     
                     playerZ += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -155 && rot.y > -190){ // turn rght
+                if(rot.y < -155 && rot.y > -190){ // turn head rght
     
                     playerZ += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 225 && rot.y > 190){ // turn left
+                if(rot.y < 225 && rot.y > 190){ // turn head left
     
                     playerZ += 0.05;
                     playerX += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -190 && rot.y > -225){ // turn right
+                if(rot.y < -190 && rot.y > -225){ // turn head right
     
                     playerZ += 0.05;
                     playerX -= 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 275 && rot.y > 225){ // turn left
+                if(rot.y < 275 && rot.y > 225){ // turn head left
     
                     playerX += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -225 && rot.y > -275){ // turn right
+                if(rot.y < -225 && rot.y > -275){ // turn head right
     
                     playerX -= 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 310 && rot.y > 275){ // turn left
+                if(rot.y < 310 && rot.y > 275){ // turn head left
     
                     playerZ -= 0.05;
                     playerX += 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -275 && rot.y > -310){ // turn right
+                if(rot.y < -275 && rot.y > -310){ // turn head right
     
                     playerZ -= 0.05;
                     playerX -= 0.05;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < 359 && rot.y > 310){ // turn left
+                if(rot.y < 359 && rot.y > 310){ // turn head left
     
                     playerZ -= 0.05;
                     playerX += 0.03;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
-                if(rot.y < -310 && rot.y > -359){ // turn left
+                if(rot.y < -310 && rot.y > -359){ // turn head left
     
                     playerZ -= 0.05;
                     playerX -= 0.03;
-                    player.setAttribute('position', playerX + ' ' + playerY +' ' + playerZ);
+                    player.setAttribute('position', playerX + ' ' + playerY + ' ' + playerZ);
                 }
     
-                console.log(rot.y);
-                //console.log(pos.x);
+                //console.log(rot.y);
             }
 
-        }, 1000);
+        }, 30);
 
         
        
@@ -469,6 +473,15 @@ export class HomeComponent implements OnInit {
                         if(controller[1].buttons[0].pressed == false){
 
                             isMoving = false;
+
+                            let newWand = document.createElement('a-entity');
+                            
+                            // newWand.setAttribute("id", "Wand");
+                            // newWand.setAttribute('primitive', 'box');
+                            // newWand.setAttribute('position', ".1 0 -.7");
+                            // newWand.setAttribute('material', 'color: #49311c');
+                            // newWand.setAttribute('rotation', "45 0 0");
+                            // scene.appendChild(newWand);
                         }
                     
                         //buttons[0] is the D-Pad on GearVR
