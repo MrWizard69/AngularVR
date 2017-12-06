@@ -50,12 +50,12 @@ export class HomeComponent implements OnInit {
         let cursorZ: number = -3;
 
         let playerX: number = 0;
-        let playerY: number = 1.6; //1.3
+        let playerY: number = 2.6; //1.3
         let playerZ: number = 0;
 
         let wandX: number = .1;
-        let wandY: number = -1.5;
-        let wandZ: number = -.4;
+        let wandY: number = .2;
+        let wandZ: number = -.7;
 
         
 
@@ -276,12 +276,16 @@ export class HomeComponent implements OnInit {
                 let pos: any = document.querySelector('#player').getAttribute('position');
                 let rot: any = document.querySelector('#player').getAttribute('rotation');
                 let player: any = document.querySelector('#player');
-                //let wand: any = document.querySelector('#Wand');
+                let wand: any = document.querySelector('#Wand');
                 //playerY = 1.6;
                 //let rotation: number = 0;
 
                 // let thisWand: any = document.querySelector('#Wand');
                 // thisWand.parentNode.removeChild(thisWand);
+                //wandX = playerX + .1;
+                wandZ = playerZ * -.1;
+                wand.setAttribute('position', wandX + ' ' + wandY + ' ' + wandZ);
+                wand.setAttribute('rotation', '45 0 0');
     
                 if(rot.y > 359){
     
